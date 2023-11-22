@@ -9,7 +9,9 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    
     @State private var input: String = ""
+    @State private var isModalPresented = false
 
     var body: some View {
         NavigationView {
@@ -51,7 +53,7 @@ struct ContentView: View {
                 Spacer()
 
                 HStack() {
-                    Button(action: {}, label: {
+                    Button(action: {isModalPresented.toggle()}, label: {
                         Text("English")
                             .font(Font.system(size: 15).weight(.bold))
                             .foregroundColor(.gray)
@@ -67,7 +69,7 @@ struct ContentView: View {
                             .foregroundColor(.gray)
                             .padding(.horizontal, 10)
                     })
-                    Button(action: {}, label: {
+                    Button(action: {isModalPresented.toggle()}, label: {
                         Text("French")
                             .font(Font.system(size: 15).weight(.bold))
                             .foregroundColor(.gray)
@@ -80,6 +82,10 @@ struct ContentView: View {
                 }.padding(.vertical, 20)
 
             }.background(Color(red: 242/255, green: 242/255, blue: 242/255))
+                .sheet(isPresented: $isModalPresented, content: {
+                    LanguageListView(isModalPresented: $isModalPresented)
+                })
+
         }
 
     }

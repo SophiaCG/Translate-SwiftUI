@@ -17,6 +17,10 @@
 		EE8C2A2D2B0D787500B4EF65 /* Translate_SwiftUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C2A2C2B0D787500B4EF65 /* Translate_SwiftUIUITests.swift */; };
 		EE8C2A2F2B0D787500B4EF65 /* Translate_SwiftUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C2A2E2B0D787500B4EF65 /* Translate_SwiftUIUITestsLaunchTests.swift */; };
 		EE8C2A3F2B0DA6B900B4EF65 /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C2A3E2B0DA6B900B4EF65 /* SavedView.swift */; };
+		EE8C2A412B0EA99800B4EF65 /* LanguageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C2A402B0EA99800B4EF65 /* LanguageListView.swift */; };
+		EE8C2A432B0EADC300B4EF65 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C2A422B0EADC300B4EF65 /* ViewModel.swift */; };
+		EE8C2A452B0EAE2100B4EF65 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C2A442B0EAE2100B4EF65 /* Model.swift */; };
+		EE8C2A472B0EB01300B4EF65 /* key.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C2A462B0EB01300B4EF65 /* key.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,10 @@
 		EE8C2A2C2B0D787500B4EF65 /* Translate_SwiftUIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translate_SwiftUIUITests.swift; sourceTree = "<group>"; };
 		EE8C2A2E2B0D787500B4EF65 /* Translate_SwiftUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translate_SwiftUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EE8C2A3E2B0DA6B900B4EF65 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
+		EE8C2A402B0EA99800B4EF65 /* LanguageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageListView.swift; sourceTree = "<group>"; };
+		EE8C2A422B0EADC300B4EF65 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		EE8C2A442B0EAE2100B4EF65 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		EE8C2A462B0EB01300B4EF65 /* key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = key.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,15 +109,16 @@
 		EE8C2A0A2B0D787100B4EF65 /* Translate-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				EE8C2A3D2B0D900A00B4EF65 /* ViewModels */,
-				EE8C2A3C2B0D8FF700B4EF65 /* Models */,
 				EE8C2A0B2B0D787100B4EF65 /* Translate_SwiftUIApp.swift */,
 				EE8C2A0D2B0D787100B4EF65 /* Persistence.swift */,
+				EE8C2A3C2B0D8FF700B4EF65 /* Models */,
+				EE8C2A3D2B0D900A00B4EF65 /* ViewModels */,
 				EE8C2A3B2B0D8FE700B4EF65 /* Views */,
 				EE8C2A142B0D787400B4EF65 /* Assets.xcassets */,
 				EE8C2A162B0D787400B4EF65 /* Translate_SwiftUI.entitlements */,
 				EE8C2A0F2B0D787100B4EF65 /* Translate_SwiftUI.xcdatamodeld */,
 				EE8C2A172B0D787400B4EF65 /* Preview Content */,
+				EE8C2A462B0EB01300B4EF65 /* key.swift */,
 			);
 			path = "Translate-SwiftUI";
 			sourceTree = "<group>";
@@ -144,6 +153,7 @@
 			children = (
 				EE8C2A122B0D787100B4EF65 /* ContentView.swift */,
 				EE8C2A3E2B0DA6B900B4EF65 /* SavedView.swift */,
+				EE8C2A402B0EA99800B4EF65 /* LanguageListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -151,6 +161,7 @@
 		EE8C2A3C2B0D8FF700B4EF65 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EE8C2A442B0EAE2100B4EF65 /* Model.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -158,6 +169,7 @@
 		EE8C2A3D2B0D900A00B4EF65 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				EE8C2A422B0EADC300B4EF65 /* ViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -294,9 +306,13 @@
 			files = (
 				EE8C2A0C2B0D787100B4EF65 /* Translate_SwiftUIApp.swift in Sources */,
 				EE8C2A3F2B0DA6B900B4EF65 /* SavedView.swift in Sources */,
+				EE8C2A412B0EA99800B4EF65 /* LanguageListView.swift in Sources */,
 				EE8C2A112B0D787100B4EF65 /* Translate_SwiftUI.xcdatamodeld in Sources */,
+				EE8C2A472B0EB01300B4EF65 /* key.swift in Sources */,
 				EE8C2A132B0D787100B4EF65 /* ContentView.swift in Sources */,
 				EE8C2A0E2B0D787100B4EF65 /* Persistence.swift in Sources */,
+				EE8C2A432B0EADC300B4EF65 /* ViewModel.swift in Sources */,
+				EE8C2A452B0EAE2100B4EF65 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
