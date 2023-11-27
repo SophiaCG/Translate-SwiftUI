@@ -9,11 +9,12 @@ import Foundation
 import SwiftUI
 
 struct LanguageListView: View {
-    let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]
+    @State var languageList: [Language] = []     // Name of language (i.e. English)
+    @Binding var firstLanguage: Language
+    @Binding var secondLanguage: Language
+    @Binding var selected: Int
     @Binding var isModalPresented: Bool
-    @ObservedObject var viewModel = ViewModel()
-    @State var names: [String] = []     // Name of language (i.e. English)
-    @State var codes: [String] = []     // Code of language (i.e. en)
+    @ObservedObject var networkRequest = NetworkRequest()
 
     var body: some View {
         HStack {
@@ -32,19 +33,29 @@ struct LanguageListView: View {
 
         List {
             Section(header: Text("ALL LANGUAGES").fontWeight(.medium)) {
-                ForEach(names, id: \.self) { name in
-                    HStack {
-                            Text(name)
-                                .font(Font.system(size: 18).weight(.medium))
-                                .foregroundColor(.black)
-                    }.listRowSeparator(.hidden)
+                ForEach(languageList, id: \.self) { language in
+                    Button(action: {
+                        if selected == 1 {
+                            firstLanguage = language
+                        } else {
+                            secondLanguage = language
+                        }
+                        isModalPresented = false
+                    }, label: {
+                        HStack {
+                            Text(language.name)
+                                    .font(Font.system(size: 18).weight(.medium))
+                                    .foregroundColor(.black)
+                        }
+                    })
+                    .listRowSeparator(.hidden)
                 }
             }
         }.onAppear {
-            ViewModel().getLanguages { (results) in
+            networkRequest.getLanguages { (results) in
                 for result in results.data.languages {
-                    names.append(result.name)
-                    codes.append(result.language)
+                    let language = Language(language: result.language, name: result.name)
+                    languageList.append(language)
                 }
             }
         }

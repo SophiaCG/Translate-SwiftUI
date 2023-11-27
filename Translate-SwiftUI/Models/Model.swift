@@ -16,7 +16,16 @@ struct Languages: Codable {
     var languages: [Language]
 }
 
-struct Language: Codable {
+struct Language: Codable, Hashable {
     var language: String
     var name: String
+}
+
+//MARK: - Model for translations
+struct ResponseData: Codable {
+    var responseData: Translation
+}
+
+struct Translation: Codable {
+    var translatedText: String
 }

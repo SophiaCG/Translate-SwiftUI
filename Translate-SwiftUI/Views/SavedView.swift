@@ -9,29 +9,39 @@ import Foundation
 import SwiftUI
 
 struct SavedView: View {
-    var title: String
-    let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]
+    @StateObject private var translationVM = TranslationViewModel()
 
     var body: some View {
-        List {
-            ForEach(items, id: \.self) { item in
+        List(translationVM.translations, id: \.self) { (translation: SavedTranslation) in
+            if translationVM.translations.count == 0 {
+                Text("Star a translation to see it here")
+            } else {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(item)
+                        Text(translation.input ?? "")
                             .font(Font.system(size: 18).weight(.bold))
                             .foregroundColor(.black)
 
-                        Text(item)
+                        Text(translation.translation ?? "")
                             .font(Font.system(size: 16).weight(.bold))
                             .foregroundColor(.gray)
 
                     }
                     Spacer()
-                    Image(systemName: "star.fill")
-                        .font(Font.system(size: 18).weight(.bold))
-                        .foregroundColor(.yellow)
+                    Button(action: {
+                        if translationVM.translationExists(input: translation.input  ?? "", translation: translation.translation ?? "") {
+                            translationVM.deleteTranslation(input: translation.input ?? "", translation: translation.translation ?? "")
+                        }
+                    }) {
+                        Image(systemName: translationVM.translationExists(input: translation.input  ?? "", translation: translation.translation ?? "") ? "star.fill" : "star")
+                            .font(Font.system(size: 18).weight(.bold))
+                            .foregroundColor(translationVM.translationExists(input: translation.input ?? "", translation: translation.translation ?? "") ? .yellow : .gray)
+                    }
                 }
             }
+        }
+        .onAppear {
+            translationVM.fetchTranslations()
         }
         .listStyle(PlainListStyle())
             .navigationTitle("Saved")
@@ -52,5 +62,5 @@ struct SavedView: View {
 }
 
 #Preview {
-    SavedView(title: "Saved View")
+    SavedView()
 }
