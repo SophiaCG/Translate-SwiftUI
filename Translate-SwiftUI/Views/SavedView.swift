@@ -9,10 +9,25 @@ import Foundation
 import SwiftUI
 
 struct SavedView: View {
+    enum SortOrder {
+        case alphabetical
+        case byTime
+    }
+
     @StateObject private var translationVM = TranslationViewModel()
+    @State private var sortOrder: SortOrder = .alphabetical
+
+    var sortedTranslations: [SavedTranslation] {
+        switch sortOrder {
+        case .alphabetical:
+            return translationVM.translations.sorted(by: { $0.input ?? "" < $1.input ?? "" })
+        case .byTime:
+            return translationVM.translations.sorted(by: { $0.timestamp ?? Date() > $1.timestamp ?? Date() })
+        }
+    }
 
     var body: some View {
-        List(translationVM.translations, id: \.self) { (translation: SavedTranslation) in
+        List(sortedTranslations, id: \.self) { (translation: SavedTranslation) in
             if translationVM.translations.count == 0 {
                 Text("Star a translation to see it here")
             } else {
@@ -51,10 +66,40 @@ struct SavedView: View {
                     Image(systemName: "arrow.clockwise")
                         .font(Font.system(size: 15).weight(.bold))
                         .foregroundColor(.black)
-                    Image(systemName: "slider.horizontal.3")
-                        .font(Font.system(size: 15).weight(.bold))
-                        .foregroundColor(.black)
-                        .padding(5)
+                    Menu {
+                        Button {
+                            sortOrder = .alphabetical
+                        } label: {
+                            HStack {
+                                Image(systemName: sortOrder == .alphabetical ? "checkmark" : "")
+                                    .font(.system(size: 20).weight(.bold))
+                                    .foregroundColor(.gray)
+                                    .layoutPriority(10)
+
+                                Text("Sort alphabetically")
+                            }
+                        }
+                        
+                        Button {
+                            sortOrder = .byTime
+                        } label: {
+                            HStack {
+                                Text("Sort by time")
+
+                                Image(systemName: sortOrder == .byTime ? "checkmark" : "")
+                                    .font(.system(size: 20).weight(.bold))
+                                    .foregroundColor(.gray)
+                                    .layoutPriority(2)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "slider.horizontal.3")
+                            .font(Font.system(size: 15).weight(.bold))
+                            .foregroundColor(.black)
+                            .padding(5)
+
+                    }
+
                 }
             )
 
